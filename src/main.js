@@ -20,7 +20,7 @@ const safeLink = (url) => url || links.tiktokProfile;
 const header = `
   <header class="site-header" data-header>
     <a class="wordmark" href="#top" aria-label="Gecho Makina Equb home">
-      <span class="wordmark-mark">G</span>
+      <img class="wordmark-logo" src="/assets/photos/logo.jpg" alt="" />
       <span><strong>${brand.english}</strong><small>${brand.amharic}</small></span>
     </a>
     <nav class="desktop-nav" aria-label="Primary navigation">
@@ -38,7 +38,6 @@ const videoCard = (video, index) => `
   <article class="video-card reveal" style="--delay:${index * 90}ms">
     <a class="video-poster" href="${safeLink(video.url)}" target="_blank" rel="noreferrer" aria-label="Open ${video.role}: ${video.caption} on TikTok">
       <img src="${video.poster}" alt="${video.description}" loading="lazy" onerror="this.classList.add('media-unavailable')" />
-      <span class="temporary-badge">Illustrative image</span>
       <span class="play-button">${icon('play')}</span>
     </a>
     <div class="video-card-copy"><p class="eyebrow">${video.role}</p><h3>${video.caption}</h3><p>${video.description}</p><a class="text-link" href="${safeLink(video.url)}" target="_blank" rel="noreferrer">View on TikTok ${icon('external')}</a></div>
@@ -53,7 +52,7 @@ app.innerHTML = `
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-image" style="background-image:url('${media.hero.src}')"></div><div class="hero-shade"></div>
       <div class="hero-content"><p class="eyebrow hero-eyebrow">${brand.amharic} <span></span> Car-focused equb</p><h1 id="hero-title">A shared path<br /><em>to a car.</em></h1><p class="hero-copy">${brand.description}</p><div class="hero-actions"><a class="button button-gold" href="#contact">Contact us for current details ${icon('arrow')}</a><a class="button button-quiet" href="#process">How it works ${icon('arrow')}</a></div><a class="hero-story-link" href="#moments">Watch the moments ${icon('arrow')}</a></div>
-      <div class="hero-meta"><span>01 / 04</span><span class="hero-line"></span><span>Scroll to discover</span></div><span class="temporary-hero-note">Illustrative automotive image</span>
+      <div class="hero-meta"><span>01 / 04</span><span class="hero-line"></span><span>Scroll to discover</span></div>
     </section>
 
     <section class="intro section-pad" id="about" aria-labelledby="about-title"><div class="section-kicker"><span>01</span><span class="rule"></span><span>About Gecho</span></div><div class="intro-grid"><div><h2 id="about-title">Cars, community<br /><em>and possibility.</em></h2></div><div class="intro-copy"><p class="lead">Gecho Makina Equb brings people together around a car-focused equb in Ethiopia.</p><p>People participate by purchasing tickets, a draw takes place, and selected participants may receive vehicles. Current participation details are shared through the official channel.</p><a class="text-link" href="#contact">Contact us for current details ${icon('arrow')}</a></div></div></section>
@@ -68,13 +67,13 @@ app.innerHTML = `
 
     <section class="contact section-pad" id="contact" aria-labelledby="contact-title"><div class="contact-panel"><div><p class="eyebrow">05 / Get in touch</p><h2 id="contact-title">Ready to learn<br /><em>more?</em></h2><p class="contact-copy">Contact Gecho through the official TikTok profile for current participation details, ticket information and public updates.</p></div><div class="contact-actions"><a class="button button-gold" href="${safeLink(links.tiktokProfile)}" target="_blank" rel="noreferrer">Contact us on TikTok ${icon('external')}</a><span class="contact-status">@getachewfikadujirata<br /><small>Official TikTok profile</small></span></div></div></section>
   </main>
-  <footer class="site-footer"><a class="wordmark" href="#top"><span class="wordmark-mark">G</span><span><strong>${brand.english}</strong><small>${brand.amharic}</small></span></a><p>Car-focused equb in Ethiopia. Follow the official channel for current participation details and public updates.</p><a href="#top" class="back-top">Back to top ${icon('arrow')}</a></footer>
+  <footer class="site-footer"><a class="wordmark" href="#top"><img class="wordmark-logo" src="/assets/photos/logo.jpg" alt="" /><span><strong>${brand.english}</strong><small>${brand.amharic}</small></span></a><p>Car-focused equb in Ethiopia. Follow the official channel for current participation details and public updates.</p><a href="#top" class="back-top">Back to top ${icon('arrow')}</a></footer>
   <dialog class="media-dialog" id="media-dialog"><button class="dialog-close" type="button" data-close-dialog aria-label="Close gallery image">${icon('close')}</button><div class="dialog-content"></div></dialog>
 `;
 
 const dialog = document.querySelector('#media-dialog');
 const dialogContent = dialog.querySelector('.dialog-content');
-document.querySelectorAll('[data-gallery]').forEach(button => button.addEventListener('click', () => { const item = media.gallery[button.dataset.gallery]; dialogContent.innerHTML = `<img class="dialog-image" src="${item.src}" alt="${item.alt}" /><p class="eyebrow">${item.label}</p><p>${item.temporary ? 'Illustrative vehicle image.' : 'Supplied Gecho portrait.'}</p>`; dialog.showModal(); }));
+document.querySelectorAll('[data-gallery]').forEach(button => button.addEventListener('click', () => { const item = media.gallery[button.dataset.gallery]; dialogContent.innerHTML = `<img class="dialog-image" src="${item.src}" alt="${item.alt}" /><p class="eyebrow">${item.label}</p><p>${item.temporary ? 'Vehicle detail.' : 'Supplied Gecho portrait.'}</p>`; dialog.showModal(); }));
 dialog.addEventListener('click', (event) => { if (event.target === dialog || event.target.closest('[data-close-dialog]')) dialog.close(); });
 document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && dialog.open) dialog.close(); });
 const menuToggle = document.querySelector('.menu-toggle'); const mobileMenu = document.querySelector('#mobile-menu');

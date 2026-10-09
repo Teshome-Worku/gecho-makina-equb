@@ -37,3 +37,11 @@
 .hero-story-link:hover svg {
     transform: translateX(4px)
 }
+
+.wordmark-logo {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    object-fit: cover;
+    border: 1px solid var(--gold);
+}
