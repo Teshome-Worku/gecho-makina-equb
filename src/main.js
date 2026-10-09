@@ -49,7 +49,7 @@ const videoCard = (video, index) => `
 
 const carCard = (car, index) => `
   <article class="car-card reveal" style="--delay:${index * 70}ms">
-    <div class="car-image-wrap"><img src="${car.image}" alt="${car.alt}" loading="lazy" onerror="this.classList.add('media-unavailable')" /><span class="car-index">0${index + 1}</span></div>
+    <div class="car-image-wrap"><img src="${car.image}" alt="${car.alt}" style="object-position:${car.position || 'center'}" loading="lazy" onerror="this.classList.add('media-unavailable')" /><span class="car-index">0${index + 1}</span></div>
     <div class="car-card-copy"><p class="eyebrow">${car.category}</p><h3>${car.title}</h3><p>${car.description}</p></div>
   </article>`;
 
