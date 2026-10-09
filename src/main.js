@@ -58,6 +58,8 @@ const phoneCard = (phone) => `
     <span class="contact-card-icon">${icon('phone')}</span><div><p class="eyebrow">Call Gecho</p><a class="contact-value" href="tel:${phone}">${phone}</a></div><button class="copy-number" type="button" data-copy-number="${phone}" aria-label="Copy ${phone}">${icon('copy')}<span>Copy</span></button>
   </article>`;
 
+const callOption = (phone) => `<a class="call-option" href="tel:${phone}">${icon('phone')}<span>${phone}</span>${icon('arrow')}</a>`;
+
 const galleryItem = (item, index) => `<button class="gallery-item ${index === 0 ? 'gallery-feature' : ''} reveal" type="button" data-gallery="${index}" style="--delay:${index * 90}ms"><img src="${item.src}" alt="${item.alt}" loading="lazy" onerror="this.classList.add('media-unavailable')" /><span>${item.label}</span></button>`;
 
 const app = document.querySelector('#app');
@@ -83,6 +85,7 @@ app.innerHTML = `
     <section class="contact section-pad" id="contact" aria-labelledby="contact-title"><div class="contact-panel"><div><p class="eyebrow">05 / Get in touch</p><h2 id="contact-title">Let’s talk<br /><em>cars.</em></h2><p class="contact-copy">Ask Gecho about current participation details, tickets and the latest draw moments. Choose the channel that works best for you.</p></div><div class="contact-actions"><a class="social-contact-link" href="${links.tiktokProfile}" target="_blank" rel="noopener noreferrer">${icon('tiktok')}<span><small>Follow the story</small><strong>TikTok</strong></span>${icon('external')}</a><a class="social-contact-link" href="${contact.telegram.url}" target="_blank" rel="noopener noreferrer">${icon('telegram')}<span><small>Message Gecho</small><strong>Telegram ${contact.telegram.username}</strong></span>${icon('external')}</a><a class="social-contact-link telegram-group-card" href="${links.telegramGroup}" target="_blank" rel="noopener noreferrer">${icon('telegram')}<span><small>Join the community</small><strong>Telegram group</strong></span>${icon('external')}</a></div></div><div class="phone-grid">${contact.phones.map(phoneCard).join('')}</div></section>
   </main>
   <footer class="site-footer"><a class="wordmark" href="#top"><img class="wordmark-logo" src="/assets/photos/logo.jpg" alt="" /><span><strong>${brand.english}</strong><small>${brand.amharic}</small></span></a><p>Car-focused equb in Ethiopia. Follow the official channel for current participation details and public updates.</p><div class="footer-links"><a href="${links.tiktokProfile}" target="_blank" rel="noopener noreferrer" aria-label="Gecho on TikTok">${icon('tiktok')}</a><a href="${contact.telegram.url}" target="_blank" rel="noopener noreferrer" aria-label="Message Gecho directly on Telegram">${icon('telegram')}</a><a href="${links.telegramGroup}" target="_blank" rel="noopener noreferrer" aria-label="Join the Gecho Telegram community">${icon('telegram')}</a><a href="#top" class="back-top">Back to top ${icon('arrow')}</a></div></footer>
+  <div class="call-dock" data-call-dock><button class="call-fab" type="button" data-call-toggle aria-expanded="false" aria-controls="call-menu">${icon('phone')}<span>Call Gecho</span></button><div class="call-menu" id="call-menu" role="dialog" aria-labelledby="call-menu-title" hidden><div class="call-menu-heading"><p id="call-menu-title">Call Gecho</p><button type="button" data-call-close aria-label="Close Call Gecho menu">${icon('close')}</button></div><p class="call-menu-copy">Choose a number to call.</p><div class="call-options">${contact.phones.map(callOption).join('')}</div></div></div>
   <dialog class="media-dialog" id="media-dialog"><button class="dialog-close" type="button" data-close-dialog aria-label="Close gallery image">${icon('close')}</button><div class="dialog-content"></div></dialog>
 `;
 
@@ -117,3 +120,13 @@ document.querySelectorAll('[data-copy-number]').forEach(button => button.addEven
   try { await navigator.clipboard.writeText(number); } catch { const input = document.createElement('input'); input.value = number; document.body.append(input); input.select(); document.execCommand('copy'); input.remove(); }
   const label = button.querySelector('span'); const original = label.textContent; label.textContent = 'Copied'; button.classList.add('is-copied'); setTimeout(() => { label.textContent = original; button.classList.remove('is-copied'); }, 1600);
 }));
+
+const callDock = document.querySelector('[data-call-dock]');
+const callToggle = document.querySelector('[data-call-toggle]');
+const callMenu = document.querySelector('#call-menu');
+const setCallMenu = (open) => { callMenu.hidden = !open; callToggle.setAttribute('aria-expanded', String(open)); callDock.classList.toggle('is-open', open); if (open) callMenu.querySelector('a').focus(); else callToggle.focus(); };
+callToggle.addEventListener('click', () => setCallMenu(callMenu.hidden));
+callMenu.querySelector('[data-call-close]').addEventListener('click', () => setCallMenu(false));
+callMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setCallMenu(false)));
+document.addEventListener('click', (event) => { if (!callMenu.hidden && !callDock.contains(event.target)) setCallMenu(false); });
+document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !callMenu.hidden) setCallMenu(false); });

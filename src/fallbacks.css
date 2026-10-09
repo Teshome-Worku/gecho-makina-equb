@@ -432,6 +432,152 @@
     color: var(--gold);
 }
 
+.call-dock {
+    position: fixed;
+    z-index: 30;
+    right: max(22px, env(safe-area-inset-right));
+    bottom: max(22px, env(safe-area-inset-bottom));
+}
+
+.call-fab {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 50px;
+    padding: 0 18px;
+    border: 1px solid var(--gold);
+    background: var(--ink);
+    color: var(--ivory);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, .28);
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    transition: background .25s, color .25s, transform .25s, box-shadow .25s;
+    animation: call-dock-in .7s .35s both;
+}
+
+.call-fab svg {
+    width: 17px;
+    color: var(--gold);
+}
+
+.call-fab:hover,
+.call-dock.is-open .call-fab {
+    background: var(--gold);
+    color: var(--ink);
+    box-shadow: 0 17px 38px rgba(0, 0, 0, .38);
+    transform: translateY(-2px);
+}
+
+.call-fab:hover svg,
+.call-dock.is-open .call-fab svg {
+    color: var(--ink);
+}
+
+.call-menu {
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + 12px);
+    width: 255px;
+    padding: 18px;
+    background: var(--charcoal);
+    border: 1px solid var(--gold);
+    box-shadow: 0 20px 55px rgba(0, 0, 0, .45);
+    animation: call-menu-in .2s ease both;
+}
+
+.call-menu-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 13px;
+}
+
+.call-menu-heading p {
+    margin: 0;
+    color: var(--ivory);
+    font-family: var(--serif);
+    font-size: 25px;
+}
+
+.call-menu-heading button {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+}
+
+.call-menu-copy {
+    margin: 13px 0 12px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.call-options {
+    display: grid;
+    gap: 7px;
+}
+
+.call-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 42px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    color: var(--ivory);
+    font-family: var(--mono);
+    font-size: 12px;
+    transition: border-color .2s, color .2s, background .2s;
+}
+
+.call-option svg:first-child {
+    width: 15px;
+    color: var(--gold);
+}
+
+.call-option svg:last-child {
+    width: 14px;
+    margin-left: auto;
+}
+
+.call-option:hover {
+    border-color: var(--gold);
+    background: rgba(210, 172, 103, .1);
+    color: var(--gold);
+}
+
+@keyframes call-dock-in {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes call-menu-in {
+    from {
+        opacity: 0;
+        transform: translateY(7px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @media(max-width:800px) {
     .hero-controls {
         right: 7vw;
@@ -479,9 +625,41 @@
     .footer-links {
         flex-wrap: wrap;
     }
+
+    .call-dock {
+        right: max(16px, env(safe-area-inset-right));
+        bottom: max(16px, env(safe-area-inset-bottom));
+    }
+
+    .call-fab {
+        width: 52px;
+        min-height: 52px;
+        justify-content: center;
+        padding: 0;
+    }
+
+    .call-fab span {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+    }
+
+    .call-menu {
+        right: 0;
+        width: min(255px, calc(100vw - 32px));
+    }
 }
 
 @media(prefers-reduced-motion: reduce) {
+
+    .call-fab,
+    .call-menu {
+        animation: none;
+    }
+
     .hero-slide {
         transition: none;
         transform: none;
