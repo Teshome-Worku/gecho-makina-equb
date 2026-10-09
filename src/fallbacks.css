@@ -1,0 +1,15 @@
+.hero-image {
+    background-image: linear-gradient(115deg, #202c31 0%, #131619 46%, #5d452c 100%)
+}
+
+.video-poster:has(.media-unavailable) {
+    background: linear-gradient(135deg, #29343a, #8a6536 58%, #111214)
+}
+
+.gallery-item:has(.media-unavailable) {
+    background: linear-gradient(135deg, #29343a, #8a6536 58%, #111214)
+}
+
+.media-unavailable {
+    display: none !important
+}
