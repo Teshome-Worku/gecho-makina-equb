@@ -263,6 +263,17 @@
     margin-top: 35px;
 }
 
+.moments-cta {
+    margin-top: 38px;
+    background: var(--ink);
+    color: var(--ivory);
+}
+
+.moments-cta:hover {
+    background: var(--gold);
+    color: var(--ink);
+}
+
 .contact-panel {
     align-items: flex-end;
 }
