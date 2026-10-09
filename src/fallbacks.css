@@ -38,6 +38,33 @@
     transform: translateX(4px)
 }
 
+.hero-telegram-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: 16px;
+    color: rgba(244, 240, 231, .78);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    transition: color .25s;
+}
+
+.hero-telegram-link svg:first-child {
+    width: 17px;
+    height: 17px;
+    color: #229ed9;
+}
+
+.hero-telegram-link svg:last-child {
+    width: 13px;
+}
+
+.hero-telegram-link:hover {
+    color: var(--ivory);
+}
+
 .wordmark-logo {
     width: 38px;
     height: 38px;
@@ -326,6 +353,10 @@
     transform: translateY(-2px);
 }
 
+.telegram-group-card>svg:first-child {
+    color: #229ed9;
+}
+
 .phone-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -435,6 +466,10 @@
 
     .social-contact-link {
         min-width: 0;
+    }
+
+    .telegram-group-card {
+        grid-column: span 2;
     }
 
     .phone-grid {

@@ -9,6 +9,7 @@ export const siteContent = {
   links: {
     tiktokProfile: 'https://www.tiktok.com/@getachewfikadujirata',
     telegram: 'https://t.me/gech49',
+    telegramGroup: 'https://t.me/getachew_Fikadu_yemekina_ukubi',
     whatsapp: '',
     facebook: '',
     map: '',
