@@ -46,6 +46,48 @@
     border: 1px solid var(--gold);
 }
 
+.portrait-image {
+    position: relative;
+}
+
+.portrait-name-backdrop {
+    position: absolute;
+    z-index: 1;
+    left: 5%;
+    bottom: 7%;
+    color: var(--gold);
+    font-family: var(--serif);
+    font-size: clamp(48px, 7vw, 112px);
+    font-style: italic;
+    font-weight: 600;
+    line-height: .82;
+    letter-spacing: -.04em;
+    opacity: .22;
+    pointer-events: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.portrait-owner-tag {
+    position: absolute;
+    z-index: 2;
+    left: 7vw;
+    bottom: 28px;
+    padding: 8px 11px;
+    background: rgba(17, 18, 20, .78);
+    color: var(--gold);
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.owner-name {
+    margin: 25px 0 27px;
+    color: var(--ivory);
+    font-size: clamp(42px, 5vw, 72px);
+}
+
 .hero-slides {
     position: absolute;
     inset: 0;
